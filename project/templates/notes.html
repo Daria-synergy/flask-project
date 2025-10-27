@@ -5,12 +5,15 @@
 <form action="/notes" method="post">
     <label for="h">Заголовок</label>
     <input type="text" id="h" name="h"><br>
+    <label for="s">Подзаголовок</label>
+    <input type="text" id="s" name="s"><br>
     <label for="name">Запись</label>
     <input type="text" id="name" name="name"><br>
     <button type="submit">Добавить запись</button>
 </form>
-{% for comment in note %}
-<h2>{{comment}}</h2>
-<h3>{{note[comment]}}</h3>
+{% for comment in n %}
+<h2>{{comment.title}}</h2>
+<h3>{{comment.subtitle}}</h3>
+<h4>{{comment.text}}</h4>
 {% endfor %}
 {% endblock %}
