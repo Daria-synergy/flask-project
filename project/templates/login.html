@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block content %}
+<form action="/login" method="post">
+    <label for="login">Логин</label>
+    <input type="text" id="login" name="login"><br>
+    <label for="word">Пароль</label>
+    <input type="text" id="word" name="word"><br>
+    <button type="submit">Войти</button>
+</form>
+{% endblock %}
