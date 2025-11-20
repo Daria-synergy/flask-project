@@ -1,5 +1,17 @@
 {% extends 'index.html' %}
 {% block content %}
-<div><a href="/register"> <button>Зарегестрироваться</button> </a></div>
-<a href="/login"> <button>Войти</button> </a>
+<div class="container">
+    <img class="img2" src="../static/img/home.png" alt="Домашняя страница">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         {{ message }}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="home">
+        <a href="/register"><button>Зарегистрироваться</button></a>
+        <a href="/login"><button>Войти</button></a>
+    </div>
+</div>
 {% endblock %}
