@@ -44,14 +44,10 @@ class Notes(db.Model):
 
 
 @app.route('/', methods=["GET", "POST"])
-def index():
+def home():
     '''user = User(name="Ivan", email="ivan@ivanovich.com")
     db.session.add(user)
     db.session.commit()'''
-    return render_template("index.html")
-
-@app.route('/home', methods=["GET", "POST"])
-def home():
     return render_template("home.html")
 
 @app.route('/register', methods=["post", "get"])
@@ -66,7 +62,7 @@ def reg():
 
         db.session.add(user)
         db.session.commit()
-        flash("Вы зарегистрированы!")
+        flash("Вы зарегистрированы")
         return redirect(url_for("login"))
 
 
@@ -82,17 +78,17 @@ def login():
             db.session.commit()  # Сохраняем токен в базе
             session["token"] = token  # Сохраняем токен в сессии
             session["user_id"] = user.id  # Сохраняем ID пользователя
-            flash('Вы успешно вошли!')
+            flash('Вы успешно вошли')
             return redirect(url_for("notes"))
         else:
-            flash('Неверные данные!')
+            flash('Неверные данные')
             return render_template("login.html")
 
 
 @app.before_request
 def check_auth():
     # Список страниц, доступных без авторизации
-    allowed_endpoints = ['index', 'login', 'reg', 'static', 'home']
+    allowed_endpoints = ['login', 'reg', 'static', 'home']
 
     # Если запрос к разрешённой странице - пропускаем
     if request.endpoint in allowed_endpoints:
@@ -134,11 +130,23 @@ def logout():
 def notes():
     if request.method == 'POST':
         note = Notes(title=request.form["h"], subtitle=request.form["s"], text=request.form["name"])
+        flash('Запись успешно добавлена')
         db.session.add(note)
         db.session.commit()
     n = Notes.query.all()
     return render_template("notes.html", n=n)
 
+@app.route("/create", methods=["post", "get"])
+def create():
+    return render_template("create.html")
 
+@app.route("/card/<c>")
+def card(c):
+    n = Notes.query.get(c)
+    return render_template("card.html", n=n)
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html"), 404
 if __name__ == '__main__':
     app.run(debug=True)
