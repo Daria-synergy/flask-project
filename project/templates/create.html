@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="icon-container">
+<a href="/notes">
+    <img class="img1" src="../static/img/home.png" alt="Назад">
+</a>
+<a href="/logout">
+    <img class="img1" src="../static/img/exit.png" alt="Выход">
+</a>
+</div>
+<div class="form-container">
+<form action="/notes" method="post">
+    <label for="h">Заголовок</label>
+    <input type="text" id="h" name="h"><br>
+    <label for="s">Подзаголовок</label>
+    <input type="text" id="s" name="s"><br>
+    <label for="name">Запись</label>
+    <input type="text" id="name" name="name"><br>
+    <button type="submit">Добавить запись</button>
+</form>
+</div>
+{% endblock %}
