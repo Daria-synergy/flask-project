@@ -1,10 +1,22 @@
 {% extends 'index.html' %}
 {% block content %}
+<a href="/" class="icon-container">
+    <img class="img1" src="../static/img/home.png" alt="Домашняя страница">
+</a>
+<div class="form-container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         {{ message }}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 <form action="/login" method="post">
     <label for="login">Логин</label>
     <input type="text" id="login" name="login"><br>
     <label for="word">Пароль</label>
-    <input type="text" id="word" name="word"><br>
+    <input type="password" id="word" name="word"><br>
     <button type="submit">Войти</button>
 </form>
+</div>
 {% endblock %}
